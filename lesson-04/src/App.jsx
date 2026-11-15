@@ -1,4 +1,5 @@
 import Header from "./components/Header.jsx";
+import Footer from "./components/Footer.jsx";
 import MovieList from "./components/MovieList.jsx";
 
 function App() {

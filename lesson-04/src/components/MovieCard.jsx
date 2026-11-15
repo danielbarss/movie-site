@@ -10,7 +10,7 @@ function MovieCard({ title, year, genre, rating, poster, available }) {
       <div className="movie-card__body">
         <h3 className="movie-card__title">{title}</h3>
         <p className="movie-card__meta">
-          {year} · {duration} דק׳
+          {year} · {genre}
         </p>
         <div className="movie-card__footer">
           <span className="movie-card__genre">{genre}</span>
