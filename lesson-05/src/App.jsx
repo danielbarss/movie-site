@@ -20,15 +20,17 @@ function App() {
   if (onlyAvailable) {
     shownMovies = shownMovies.filter(movie => movie.available);
   }
-   if (genre !== "all") {
+  if (genre !== "all") {
     shownMovies = shownMovies.filter(movie => movie.genre === genre);
   }
   if (text !== "") {
     shownMovies = shownMovies.filter(movie =>
-      movie.title.toLowerCase().includes(text) || String(movie.year).includes(text), 
+      movie.title.toLowerCase().includes(text)
     );
   }
-   shownMovies = [...shownMovies].sort(compareMovies);
+  shownMovies = [...shownMovies].sort(compareMovies);
+
+  const isFiltered = onlyAvailable || genre !== "all" || text !== "";
 
   function compareMovies(a, b) {
     if (sortBy === "year") {
@@ -39,8 +41,15 @@ function App() {
     }
     return b.rating - a.rating;
   }
+
   function toggleAvailable() {
     setOnlyAvailable(!onlyAvailable);
+  }
+
+  function resetFilters() {
+    setOnlyAvailable(false);
+    setQuery("");
+    setGenre("all");
   }
 
   return (
@@ -55,24 +64,31 @@ function App() {
         <MovieList title="הכי מדורגים" movies={topRated} />
 
         <div className="toolbar">
-          <SearchBar 
-          query={query} 
-          onQueryChange={setQuery}
-          genre={genre}
-          onGenreChange={setGenre} 
-          sortBy={sortBy}
-          onSortChange={setSortBy}
+          <SearchBar
+            query={query}
+            onQueryChange={setQuery}
+            genre={genre}
+            onGenreChange={setGenre}
+            sortBy={sortBy}
+            onSortChange={setSortBy}
           />
-
           <button
             className={onlyAvailable ? "btn btn--active" : "btn"}
             onClick={toggleAvailable}
           >
             רק זמינים לצפייה
           </button>
+          {isFiltered && (
+            <button className="btn" onClick={resetFilters}>
+              ניקוי
+            </button>
+          )}
         </div>
 
-        <MovieList title="כל הסרטים" movies={shownMovies} />
+        <MovieList
+          title={`כל הסרטים (${shownMovies.length})`}
+          movies={shownMovies}
+        />
 
         <AddMovieForm />
       </main>
