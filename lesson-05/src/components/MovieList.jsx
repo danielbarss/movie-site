@@ -6,8 +6,10 @@ function MovieList({ title, movies }) {
     <section className="movie-list">
       <h2 className="movie-list__title">{title}</h2>
       <div className="movie-list__grid">
-        {movies.map(movie => {
+        {movies.map(movie => {return(
+          
           <MovieCard
+            key={movie.id}
             title={movie.title}
             year={movie.year}
             duration={movie.duration}
@@ -16,6 +18,7 @@ function MovieList({ title, movies }) {
             poster={movie.poster}
             available={movie.available}
           />
+        )
         })}
       </div>
     </section>

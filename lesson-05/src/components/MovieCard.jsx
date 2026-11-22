@@ -5,15 +5,15 @@ function MovieCard({ title, year, duration, genre, rating, poster, available }) 
   const [liked, setLiked] = useState(false);
 
   function handleLike() {
-    setLiked(liked);
+    setLiked(!liked);
   }
 
   return (
     <article className="movie-card">
       <div className="movie-card__poster">
         <img src={poster} alt={title} />
-        {available && <span className="movie-card__badge">זמין לצפייה</span>}
-        <button className="movie-card__like" onClick={handleLike()}>
+        {available &&<span className="movie-card__badge">זמין לצפייה</span>}
+        <button className="movie-card__like" onClick={handleLike}>
           {liked ? "♥" : "♡"}
         </button>
       </div>
